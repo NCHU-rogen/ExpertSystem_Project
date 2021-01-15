@@ -229,7 +229,7 @@ class ExpertSystemFunctions(RuleStruct):
 		with open('CropVISTMapInfo.txt','r',encoding='utf-8') as file:
 			lines = file.readlines()
 
-		inter_code = lines[-1].split(r' = ')[1]
+		inter_code = lines[6].split(r' = ')[1]
 		index = self.siteval_df.index[self.siteval_df['Internal_Code'] == inter_code]
 
 		center_location = re.split(r'[,|=| ]+',lines[3])
