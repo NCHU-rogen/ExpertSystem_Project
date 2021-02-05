@@ -229,7 +229,7 @@ class ExpertSystemFunctions(RuleStruct):
 		with open('CropVISTMapInfo.txt','r',encoding='utf-8') as file:
 			lines = file.readlines()
 
-		inter_code = lines[6].split(r' = ')[1]
+		inter_code = lines[6].split(r' = ')[1].replace('\n','')
 		index = self.siteval_df.index[self.siteval_df['Internal_Code'] == inter_code]
 
 		center_location = re.split(r'[,|=| ]+',lines[3])
@@ -239,6 +239,7 @@ class ExpertSystemFunctions(RuleStruct):
 		self.siteval_df.iloc[index,6:9] = center_location[6:9]
 		self.siteval_df.iloc[index,13:15] = [EW_direction,NS_direction]
 		self.siteval_df.to_csv('./Dataset/SiteEva_Table.csv', index=False, encoding='utf_8_sig')
+		print(center_location,EW_direction,NS_direction,inter_code)
 
 		# Delete the figures of TempFile folder 
 		for root, dirs, files in walk(self.photo_temp):
